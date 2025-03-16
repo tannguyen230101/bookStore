@@ -11,13 +11,17 @@ const createNew = async (reqBody) => {
     try {
         const newObject = {
             ...reqBody,
-            slug: slugify(reqBody.name)
+            slug: slugify(reqBody.name),
         };
 
         const nameExist = await categoryModel.findOneByName(newObject.slug);
         if (nameExist)
             throw new ApiError(StatusCodes.BAD_REQUEST, "Name Already Have!")
 
+        console.log(categoryModel.totalPosition());
+        const position = categoryModel.totalPosition();
+        newObject.position = position + 1;
+        
         const createdCategory = await categoryModel.createNew(newObject);
 
         return await categoryModel.findOneById(createdCategory.insertedId)

@@ -15,16 +15,6 @@ const createNew = async (req, res, next) => {
             .max(2000)
             .trim()
             .strict(),
-        price: Joi
-            .number()
-            .required(),
-        numberOfPage: Joi
-            .number()
-            .required()
-            .integer(),
-        // weight: Joi
-        //     .number()
-        //     .sign()
     })
 
     try {
