@@ -1,14 +1,16 @@
 /* eslint-disable no-undef */
 import express from "express";
+import cors from 'cors'
 import { env } from "~/config/environment.js";
 import { CONNECT_DB, CLOSE_DB } from "~/config/mongodb.js";
 import exitHook from "async-exit-hook";
 import { APIs_V1 } from "~/routes/v1"
 import { errorHandlingMiddleware } from "~/middlewares/errorHandlingMiddleware";
 
-
 const START_SERVER = () => {
     const app = express();
+    app.use(cors());
+
     // Enable Json
     app.use(express.json());
 
