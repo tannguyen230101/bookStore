@@ -7,8 +7,8 @@ Router.route("/")
     .get(authorController.getAll)
     .post(authorValidation.createNew ,authorController.createNew)
 
-// Router.route("/:id")
-//     .get(categoryController.getDetails)
+Router.route("/:id")
+    .get(authorController.getDetails)
 //     .put(categoryController.updateDetails)
 //     .delete(categoryController.softDelete)
 

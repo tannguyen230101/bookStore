@@ -1,20 +1,20 @@
 import { StatusCodes } from "http-status-codes"
-import { authorService } from "../services/authorservice";
+import { bookService } from "../services/bookService";
 
 const createNew = async (req, res, next) => {
     try {
-        const createdCategory = await authorService.createNew(req.body);
+        const createdBook = await bookService.createNew(req.body);
 
         res.status(StatusCodes.CREATED)
-            .json(createdCategory)
+            .json(createdBook)
     } catch (error) { next(error) }
 }
 
 const getAll = async (req, res, next) => {
     try {
-        const categories = await authorService.getAll();
+        const books = await bookService.getAll();
 
-        res.status(StatusCodes.OK).json(categories);
+        res.status(StatusCodes.OK).json(books);
     } catch (error) {
         next(error)
     }
@@ -22,10 +22,10 @@ const getAll = async (req, res, next) => {
 
 const getDetails = async (req, res, next) => {
     try {
-        const idCategory = req.params.id;
-        const category = await authorService.getDetails(idCategory);
+        const idBook = req.params.id;
+        const book = await bookService.getDetails(idBook);
 
-        res.status(StatusCodes.OK).json(category);
+        res.status(StatusCodes.OK).json(book);
     } catch (error) {
         next(error)
     }
@@ -52,7 +52,7 @@ const getDetails = async (req, res, next) => {
 //     }
 // }
 
-export const authorController = {
+export const bookController = {
     createNew,
     getAll,
     getDetails,

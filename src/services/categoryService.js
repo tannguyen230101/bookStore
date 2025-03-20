@@ -4,8 +4,10 @@ import ApiError from "~/utils/ApiError.js";
 import { StatusCodes } from "http-status-codes";
 import { categoryModel } from "../models/categoryModel";
 
-// import pkg from 'lodash';
-// const { cloneDeep } = pkg;
+import pkg from 'lodash';
+import { bookModel } from "../models/bookModel";
+const { cloneDeep } = pkg;
+
 const createNew = async (reqBody) => {
     // eslint-disable-next-line no-useless-catch
     try {
@@ -37,12 +39,48 @@ const getDetails = async (idCategory) => {
         if (!category)
             throw new ApiError(StatusCodes.NOT_FOUND, "Category NOT FOUND!");
 
-        return category;
+        const books = await bookModel.getAll({
+            categoryId: idCategory,
+            _isDeleted: false
+        });
+
+        const resCategory = cloneDeep(category);
+
+        resCategory.books = books
+
+        resCategory.books.forEach(book => {
+            // Ví dụ: thêm hoặc định dạng lại dữ liệu của book
+            book.categoryName = resCategory.name; // Thêm tên category vào mỗi book
+            // Nếu bạn muốn xóa hoặc thêm field nào đó, hãy làm ở đây
+            // Ví dụ: xóa field _isDeleted nếu không cần
+        });
+        return resCategory;
     } catch (error) {
         throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
 }
+// const getDetails = async (boardId) => {
+//     try {
+//         const board = await boardModel.getDetails(boardId);
+//         if (!board)
+//             throw new ApiError(StatusCodes.NOT_FOUND, "Board not found!");
 
+//         const resBoard = cloneDeep(board);
+
+//         resBoard.columns.forEach(column => {
+//             // column.cards = resBoard.card.filter(card =>
+//             //     card.columnId.toString() === column._id.toString())
+//             column.cards = resBoard.card.filter(card =>
+//                 card.columnId.equals(column._id))
+//         })
+
+//         delete resBoard.cards;
+
+//         return resBoard;
+//     } catch (error) {
+//         throw error;
+//     }
+// }
 const getAll = async () => {
     try {
         const categories = await categoryModel.getAll();
