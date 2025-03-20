@@ -7,6 +7,7 @@ import { categoryModel } from "../models/categoryModel";
 import pkg from 'lodash';
 import { bookModel } from "../models/bookModel";
 const { cloneDeep } = pkg;
+
 const createNew = async (reqBody) => {
     // eslint-disable-next-line no-useless-catch
     try {
@@ -51,7 +52,7 @@ const getDetails = async (idCategory) => {
             // Ví dụ: thêm hoặc định dạng lại dữ liệu của book
             book.categoryName = resCategory.name; // Thêm tên category vào mỗi book
             // Nếu bạn muốn xóa hoặc thêm field nào đó, hãy làm ở đây
-            delete book._isDeleted; // Ví dụ: xóa field _isDeleted nếu không cần
+            // Ví dụ: xóa field _isDeleted nếu không cần
         });
         return resCategory;
     } catch (error) {

@@ -17,9 +17,9 @@ const createNew = async (reqBody) => {
             throw new ApiError(StatusCodes.BAD_REQUEST, "Name Already Have!")
 
 
-        const createdAuthor = await bookModel.createNew(newObject);
+        const createdBook = await bookModel.createNew(newObject);
 
-        return await bookModel.findOneById(createdAuthor.insertedId)
+        return await bookModel.findOneById(createdBook.insertedId)
     } catch (error) {
         throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, error);
     }
@@ -27,10 +27,10 @@ const createNew = async (reqBody) => {
 
 const getAll = async () => {
     try {
-        const authors = await bookModel.getAll();
-        if (!authors)
-            throw new ApiError(StatusCodes.NOT_FOUND, "Authors NOT FOUND!");
-        return authors;
+        const books = await bookModel.getAll();
+        if (!books)
+            throw new ApiError(StatusCodes.NOT_FOUND, "NOT FOUND!");
+        return books;
     } catch (error) {
         throw new ApiError(StatusCodes.INTERNAL_SERVER_ERROR, error);
     }

@@ -13,6 +13,10 @@ const createNew = async (req, res, next) => {
       .required()
       .pattern(OBJECT_ID_RULE)
       .message(OBJECT_ID_RULE_MESSAGE),
+    authorId: Joi.string()
+      .required()
+      .pattern(OBJECT_ID_RULE)
+      .message(OBJECT_ID_RULE_MESSAGE),
   });
 
   try {

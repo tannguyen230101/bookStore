@@ -72,12 +72,6 @@ const createNew = async (data) => {
 
 const getDetails = async (id) => {
   try {
-    // return await GET_DB()
-    //   .collection(CATEGORY_COLLECTION_NAME)
-    //   .findOne({
-    //     _id: new ObjectId(id),
-    //     _isDeleted: false,
-    //   });
     const result = await GET_DB()
       .collection(CATEGORY_COLLECTION_NAME)
       .aggregate([

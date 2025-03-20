@@ -20,16 +20,16 @@ const getAll = async (req, res, next) => {
     }
 }
 
-// const getDetails = async (req, res, next) => {
-//     try {
-//         const idCategory = req.params.id;
-//         const category = await categoryService.getDetails(idCategory);
+const getDetails = async (req, res, next) => {
+    try {
+        const idCategory = req.params.id;
+        const category = await authorService.getDetails(idCategory);
 
-//         res.status(StatusCodes.OK).json(category);
-//     } catch (error) {
-//         next(error)
-//     }
-// }
+        res.status(StatusCodes.OK).json(category);
+    } catch (error) {
+        next(error)
+    }
+}
 
 // const updateDetails = async (req, res, next) => {
 //     try {
@@ -55,7 +55,7 @@ const getAll = async (req, res, next) => {
 export const authorController = {
     createNew,
     getAll,
-    // getDetails,
+    getDetails,
     // updateDetails,
     // softDelete
 }

@@ -15,6 +15,10 @@ const BOOK_COLECTION_SCHEMA = Joi.object({
     .required()
     .pattern(OBJECT_ID_RULE)
     .message(OBJECT_ID_RULE_MESSAGE),
+  authorId: Joi.string()
+    .required()
+    .pattern(OBJECT_ID_RULE)
+    .message(OBJECT_ID_RULE_MESSAGE),
   _isDeleted: Joi.boolean().default(false),
 });
 
@@ -79,27 +83,6 @@ const getDetails = async (id) => {
         _id: new ObjectId(id),
         _isDeleted: false,
       });
-
-    // const result = await GET_DB()
-    //   .collection(BOOK_COLLECTION_NAME)
-    //   .aggregate([
-    //     {
-    //       $match: {
-    //         _id: new ObjectId(id),
-    //         _isDeleted: false
-    //       }
-    //     },
-    //     {
-    //       $lookup: {
-    //         from: categoryModel.CATEGORY_COLLECTION_NAME,
-    //         localField: "categoryId",
-    //         foreignField: "_id",
-    //         as: "categories"
-    //       }
-    //     }
-    //   ])
-    //   .toArray()
-    //   return result[0] || {};
   } catch (error) {
     throw new Error(error);
   }
