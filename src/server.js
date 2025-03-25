@@ -1,5 +1,6 @@
 /* eslint-disable no-undef */
 import express from "express";
+<<<<<<< HEAD
 import cors from 'cors'
 import { env } from "~/config/environment.js";
 import { CONNECT_DB, CLOSE_DB } from "~/config/mongodb.js";
@@ -9,6 +10,20 @@ import { errorHandlingMiddleware } from "~/middlewares/errorHandlingMiddleware";
 
 const START_SERVER = () => {
     const app = express();
+=======
+import { ENV } from "./lib/configs/env.js";
+import { connectDB } from "./lib/db.js";
+import { APIs } from "./routes/index.js";
+import { errorHandlingMiddleware } from "./middlewares/errorHandlingMiddleware.js";
+import cors from "cors";
+import job from "./lib/cron.js";
+
+const START_SERVER = () => {
+    const app = express();
+
+    job.start();
+    app.use(express.json());
+>>>>>>> e3b2d98 (cron)
     app.use(cors());
 
     // Enable Json
